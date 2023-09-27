@@ -1,0 +1,31 @@
+
+<form class="card"  (ngSubmit)="OnSubmit()" [formGroup]="form">
+  <h1>Cоздание нового поста</h1>
+
+  <div class="form-control "
+       [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}"
+  >
+    <label for="title">Заголовок</label>
+    <input type="text" id="title" formControlName="title">
+    <div class="validation" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+      <small  *ngIf="form.get('title')?.errors?.['required']" >заполните заголовок</small>
+    </div>
+
+    <div class="form-control">
+    <label>Пост</label>
+      <quill-editor formControlName="text"></quill-editor>
+    </div>
+
+    <div class="form-control"
+         [ngClass]="{invalid: form.get('author')?.touched && form.get('author')?.invalid}"
+    >
+      <label for="author">Автор</label>
+      <input type="text" id="author" formControlName="author">
+      <div class="validation" *ngIf="form.get('author')?.invalid && form.get('author')?.touched">
+        <small *ngIf="form.get('author')?.errors?.['required']" >Представьтесь)</small>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid ">Создать пост</button>
+  </div>
+</form>

@@ -1,0 +1,21 @@
+<nav class="navbar bg-primary">
+<h1>Pet Blog</h1>
+  <ul >
+    <li *ngIf="auth.isAuth">
+      <a [routerLink]="['/admin/dashboard']"> На главную </a>
+    </li>
+
+
+    <li *ngIf="!auth.isAuth">
+      <a [routerLink]="['/admin/login']"> Войти </a>
+    </li>
+
+
+  </ul>
+</nav>
+
+<div class="container">
+
+<router-outlet></router-outlet>
+
+</div>

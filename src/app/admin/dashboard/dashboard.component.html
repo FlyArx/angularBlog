@@ -1,0 +1,52 @@
+<div class="form-control">
+  <label for="search">Поиск по заголовку</label>
+  <input type="text" id="search" [formControl]="searchControl">
+</div>
+
+
+<table style="border: 1px solid black" *ngIf=" posts.length; else loading">
+
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Автор</th>
+    <th>Заголовок</th>
+    <th>Дата</th>
+    <th>Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let post of posts | searchPosts:searchControl.value; let i = index">
+    <td>
+        {{ i + 1}}
+    </td>
+    <td>
+        {{post.author}}
+    </td>
+    <td>
+{{post.title}}
+    </td>
+    <td>
+  {{post.date | date: 'medium':'':'ru'}}
+    </td>
+
+    <td >
+
+      <button [routerLink]="['/admin', 'post', post.id, 'edit']"  class="btn btn-link" style="margin-right: 10px"> Открыть </button>
+      <a (click)="remove(post.id)"> Удалить </a>
+
+
+    </td>
+
+  </tr>
+  </tbody>
+
+</table>
+<ng-template #loading >
+<ngx-skeleton-loader
+  count="5"
+  [theme]="{
+      height: '60px',
+    }"
+></ngx-skeleton-loader>
+</ng-template>
